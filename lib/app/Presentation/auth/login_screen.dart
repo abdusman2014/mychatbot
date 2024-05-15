@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:my_chatbot/app/Presentation/Widgets/app_button.dart';
 import 'package:my_chatbot/app/Presentation/Widgets/external_signin_button.dart';
 import 'package:my_chatbot/app/Presentation/Widgets/input_field.dart';
 import 'package:my_chatbot/app/Presentation/auth/sign_up_screen.dart';
 import 'package:my_chatbot/app/Presentation/chatbot_screen.dart';
+import 'package:my_chatbot/app/Presentation/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,9 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isLoading = true;
     });
-     Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const ChatbotScreen()));
- 
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override
@@ -48,7 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     fit: FlexFit.tight,
                     child: Container(),
                   ),
-                  Image.asset("assets/images/app_icon.jpg",height: 150,),
+                  Image.asset(
+                    "assets/images/app_icon.jpeg",
+                    height: 150,
+                  ),
                   const SizedBox(
                     height: 80,
                   ),
@@ -76,9 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         value: false,
                         onChanged: (val) {},
                       ),
-                       Text(
+                      Text(
                         "Remember Me",
-                        style: TextStyle(color: Colors.grey.shade300, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.grey.shade300, fontSize: 16),
                       ),
                       Expanded(child: Container()),
                       GestureDetector(
@@ -89,8 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: const Text(
                           "Forgot Password",
-                          style: TextStyle(
-                              color: Colors.green, fontSize: 16),
+                          style: TextStyle(color: Colors.green, fontSize: 16),
                         ),
                       )
                     ],
@@ -179,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontSize: 16,
                               color: Colors.green,
                               decoration: TextDecoration.underline,
-                              decorationColor:Colors.green),
+                              decorationColor: Colors.green),
                         ),
                       )
                     ],

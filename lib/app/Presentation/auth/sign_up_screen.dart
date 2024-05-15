@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:my_chatbot/app/Presentation/Widgets/app_button.dart';
 import 'package:my_chatbot/app/Presentation/Widgets/external_signin_button.dart';
 import 'package:my_chatbot/app/Presentation/Widgets/input_field.dart';
 import 'package:my_chatbot/app/Presentation/auth/login_screen.dart';
 import 'package:my_chatbot/app/Presentation/chatbot_screen.dart';
+import 'package:my_chatbot/app/Presentation/home_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -27,9 +27,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       _isLoading = true;
     });
-     Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const ChatbotScreen()));
-   
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override
@@ -56,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   //   fit: FlexFit.tight,
                   //   child: Container(),
                   // ),
-                   Text(
+                  Text(
                     "Sign Up",
                     style: TextStyle(color: Colors.grey.shade300, fontSize: 24),
                   ),
