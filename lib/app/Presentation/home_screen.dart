@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_chatbot/app/Presentation/chatbot_screen.dart';
+import 'package:my_chatbot/app/Presentation/group_chat.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -56,7 +57,10 @@ class HomeScreen extends StatelessWidget {
                       title: "Group Therapy",
                       description:
                           "Interact with other people who share the same issue",
-                      onPress: () {},
+                      onPress: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const GroupChatScreen()));
+                      },
                     ),
                     HomeContainer(
                       title: "PPS Approved",
