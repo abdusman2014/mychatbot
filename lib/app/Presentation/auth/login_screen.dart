@@ -72,31 +72,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     isPassword: true,
                     label: "Password",
                   ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: false,
-                        onChanged: (val) {},
-                      ),
-                      Text(
-                        "Remember Me",
-                        style: TextStyle(
-                            color: Colors.grey.shade300, fontSize: 16),
-                      ),
-                      Expanded(child: Container()),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) =>
-                          //         const ForgetPasswordScreen()));
-                        },
-                        child: const Text(
-                          "Forgot Password",
-                          style: TextStyle(color: Colors.green, fontSize: 16),
-                        ),
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Checkbox(
+                  //       value: false,
+                  //       onChanged: (val) {},
+                  //     ),
+                  //     Text(
+                  //       "Remember Me",
+                  //       style: TextStyle(
+                  //           color: Colors.grey.shade300, fontSize: 16),
+                  //     ),
+                  //     Expanded(child: Container()),
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         // Navigator.of(context).push(MaterialPageRoute(
+                  //         //     builder: (context) =>
+                  //         //         const ForgetPasswordScreen()));
+                  //       },
+                  //       child: const Text(
+                  //         "Forgot Password",
+                  //         style: TextStyle(color: Colors.green, fontSize: 16),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 30,
                   ),
@@ -112,51 +112,51 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 40,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          color: Colors.grey.shade300,
-                          height: 2,
-                          margin: const EdgeInsets.only(right: 12),
-                        ),
-                      ),
-                      const Text(
-                        "or sign in with",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Expanded(
-                        child: Container(
-                          color: Colors.grey.shade300,
-                          height: 2,
-                          margin: const EdgeInsets.only(left: 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ExternalSigninButton(
-                            imagePath: "assets/images/Google.png",
-                            label: "Google",
-                            onPress: () {}),
-                      ),
-                      // Expanded(child: Container()),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        child: ExternalSigninButton(
-                            imagePath: "assets/images/Facebook.png",
-                            label: "Facebook",
-                            onPress: () {}),
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: Container(
+                  //         color: Colors.grey.shade300,
+                  //         height: 2,
+                  //         margin: const EdgeInsets.only(right: 12),
+                  //       ),
+                  //     ),
+                  //     const Text(
+                  //       "or sign in with",
+                  //       style: TextStyle(fontSize: 15),
+                  //     ),
+                  //     Expanded(
+                  //       child: Container(
+                  //         color: Colors.grey.shade300,
+                  //         height: 2,
+                  //         margin: const EdgeInsets.only(left: 12),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(
+                  //   height: 40,
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: ExternalSigninButton(
+                  //           imagePath: "assets/images/Google.png",
+                  //           label: "Google",
+                  //           onPress: () {}),
+                  //     ),
+                  //     // Expanded(child: Container()),
+                  //     const SizedBox(
+                  //       width: 16,
+                  //     ),
+                  //     Expanded(
+                  //       child: ExternalSigninButton(
+                  //           imagePath: "assets/images/Facebook.png",
+                  //           label: "Facebook",
+                  //           onPress: () {}),
+                  //     )
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 50,
                   ),

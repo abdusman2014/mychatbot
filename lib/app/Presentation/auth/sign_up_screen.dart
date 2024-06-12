@@ -5,6 +5,8 @@ import 'package:my_chatbot/app/Presentation/Widgets/input_field.dart';
 import 'package:my_chatbot/app/Presentation/auth/login_screen.dart';
 import 'package:my_chatbot/app/Presentation/chatbot_screen.dart';
 import 'package:my_chatbot/app/Presentation/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -19,6 +21,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String email = "";
   String password = "";
   String confirmPassword = "";
+  Future<void> _setNewDocument(
+      {required Map<String, dynamic> data,
+      required String collectionName,
+      required String documentId}) async {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    await _firestore.collection(collectionName).doc(documentId).set(data);
+  }
 
   signUPUser() async {
     if (_isLoading) {
@@ -27,8 +36,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       _isLoading = true;
     });
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()));
+    //register user
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    UserCredential cred = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    //save user data to firebase
+    // String profilePicUrl = await StorageMethods().uploadImage(
+    //     childName: "ProfilePics", image: profilePic, isPost: false);
+
+    await _setNewDocument(
+        data: {"userId": cred.user!.uid},
+        collectionName: "users",
+        documentId: cred.user!.uid);
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
   @override

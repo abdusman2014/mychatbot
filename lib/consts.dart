@@ -1,0 +1,1 @@
+String TTS_INPUT= "This is an example of TTS";

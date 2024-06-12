@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({super.key});
@@ -8,18 +11,51 @@ class ChatbotScreen extends StatefulWidget {
 }
 
 class _ChatbotScreenState extends State<ChatbotScreen> {
-  List<String> botChats = [
-    "Nice to Meet you! How can I help you?",
-    "Good Question, But i am sorry to let you know it is out of my scope!"
-  ];
-  String chat = "";
+  List<String> botChats = [];
   List<String> userChats = [];
   var _controller = TextEditingController();
+  FlutterTts flutterTts = FlutterTts();
+
+  Future<void> getBotResponse(String userMessage) async {
+   try {
+      var url = Uri.parse('http://192.168.18.30:5000/generate'); // Replace with your server IP
+      var response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"prompt": userMessage}),
+      );
+
+     if (response.statusCode == 200) {
+       var responseBody = json.decode(response.body);
+        var generatedText = responseBody['generated_text'];
+
+        // Remove [INST] and [/INST] tags
+        generatedText = generatedText.replaceAll(RegExp(r'\[INST\]|\[\/INST\]'), '');
+
+       setState(() {
+          botChats.add(generatedText);
+        });
+      } else {
+        setState(() {
+          botChats.add("Sorry, I couldn't process your request.");
+        });
+      }
+    } catch (e) {
+      setState(() {
+        botChats.add("Error: $e");
+      });
+    }
+  }
+
+  Future<void> _speak(String text) async {
+    await flutterTts.speak(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("ChatBot")),
+        title: const Center(child: Text("hopeline")),
         backgroundColor: Colors.grey.shade200,
       ),
       body: Column(
@@ -30,7 +66,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
           const Align(
               alignment: Alignment.centerLeft,
               child: ChatWidget(
-                chat: "Hello! What is your name?",
+                chat: "Hi! What's your name?",
                 isChatBot: true,
               )),
           Expanded(
@@ -58,10 +94,8 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
             ),
           ),
           Container(
-            padding:
-                const EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
+            padding: const EdgeInsets.only(left: 20, bottom: 10, top: 10, right: 20),
             height: 60,
-            //  width: double.infinity,
             color: Colors.white,
             child: Row(
               children: <Widget>[
@@ -72,10 +106,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                         hintText: "Write message...",
                         hintStyle: TextStyle(color: Colors.black54),
                         border: InputBorder.none),
-                    // onChanged: (val) {
-                    //   // print(val);
-                    //   chat = val;
-                    // },
                   ),
                 ),
                 const SizedBox(
@@ -84,11 +114,9 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     setState(() {
-                      userChats.add(_controller.text);
-                      if (botChats.length < userChats.length) {
-                        botChats.add(
-                            "Sorry! I am not able to help you at this moment.");
-                      }
+                      String userMessage = _controller.text;
+                      userChats.add(userMessage);
+                      getBotResponse(userMessage); // Send user message to the server
                       _controller.clear();
                     });
                   },
@@ -96,6 +124,22 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                   elevation: 0,
                   child: const Icon(
                     Icons.send,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    String textToSpeak = _controller.text;
+                    _speak(textToSpeak); // Convert entered text to speech
+                  },
+                  backgroundColor: Colors.blue,
+                  elevation: 0,
+                  child: const Icon(
+                    Icons.mic,
                     color: Colors.white,
                     size: 18,
                   ),
@@ -128,6 +172,6 @@ class ChatWidget extends StatelessWidget {
               bottomRight: Radius.circular(isChatBot ? 8 : 0),
               topRight: const Radius.circular(8),
             )),
-        child: Text(chat));
+        child: Text(chat, style: TextStyle(color: Colors.white), softWrap: true));
   }
 }

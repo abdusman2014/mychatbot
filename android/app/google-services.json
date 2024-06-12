@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "219597347388",
+    "project_id": "hopelinefb",
+    "storage_bucket": "hopelinefb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219597347388:android:7c252f0e8f98b40567c139",
+        "android_client_info": {
+          "package_name": "com.example.my_chatbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg7a2T3O_kc4tpew-mxvWdKrqEH5lBRaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
